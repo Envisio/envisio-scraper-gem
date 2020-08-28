@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors       = ["Jim Li"]
   s.email         = ["jli@envisio.com"]
 
-  s.summary       = 'Summary'
-  s.description   = 'Description'
+  s.summary       = 'Envisio Web Scraper Ruby client'
+  s.description   = 'Envisio Web Scraper Ruby client'
   s.homepage      = "https://envisio.com"
   s.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
