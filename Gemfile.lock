@@ -1,0 +1,31 @@
+PATH
+  remote: .
+  specs:
+    envisioscraper (0.1.1)
+      json (~> 2.1, >= 2.1.0)
+      jwt (~> 2.2, >= 2.2.0)
+      typhoeus (~> 1.0, >= 1.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ethon (0.12.0)
+      ffi (>= 1.3.0)
+    ffi (1.13.1)
+    json (2.3.1)
+    jwt (2.2.2)
+    minitest (5.14.1)
+    rake (12.3.3)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  envisioscraper!
+  minitest (~> 5.0)
+  rake (~> 12.0)
+
+BUNDLED WITH
+   2.1.4
