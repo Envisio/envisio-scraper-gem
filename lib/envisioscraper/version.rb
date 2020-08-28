@@ -1,3 +1,3 @@
-module Envisioscraper
-  VERSION = "0.1.0"
+module EnvisioScraper
+  VERSION = "1.0.0"
 end
