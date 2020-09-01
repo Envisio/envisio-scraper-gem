@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    envisioscraper (0.1.1)
+    envisioscraper (1.0.1)
       json (~> 2.1, >= 2.1.0)
       jwt (~> 2.2, >= 2.2.0)
       typhoeus (~> 1.0, >= 1.0.1)

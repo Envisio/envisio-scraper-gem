@@ -14,7 +14,7 @@ module EnvisioScraper
       @api_client.request(
         method: :get,
         uri: "scrapes/#{scrape_id}",
-        payload: ApiPayload.new({ id: scrape_id }, [:id])
+        payload: ApiPayload.for_check_status({ id: scrape_id })
       )
     end
 
@@ -22,10 +22,7 @@ module EnvisioScraper
       @api_client.request(
         method: :post,
         uri: "scrapes/",
-        payload: ApiPayload.new(
-          { scrape_url: scrape_url, async: true, callback_url: callback_url },
-          [:scrape_url, :async, :callback_url]
-        )
+        payload: ApiPayload.for_scrape({ scrape_url: scrape_url, async: true, callback_url: callback_url })
       )
     end
 

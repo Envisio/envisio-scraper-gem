@@ -36,8 +36,6 @@ module EnvisioScraper
         JWT_SIGNING_ALGORITHM
       )
 
-      Rails.logger.ap('auth token')
-
       header_params = @default_headers.merge({
         'Authorization' => "BASE #{auth_token}"
       })
@@ -72,7 +70,7 @@ module EnvisioScraper
 
     private def build_request_url(path: '')
       slashed_path = "/#{path}".gsub(/\/+/, '/')
-      URI.encode(@config.base_url + slashed_path)
+      @config.base_url + slashed_path
     end
 
   end
