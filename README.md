@@ -2,7 +2,7 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/envisioscraper`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+This is a Ruby wrapper to the Envisio Web Scraper Service.
 
 ## Installation
 
@@ -22,19 +22,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To config EnvisioScraper, first obtain `api_key` and `api_secret` from Envisio Web Scraper Service. Record both values as ENV vars, e.g. `ENV['ENVISIO_SCRAPER_API_KEY']` and `ENV['ENVISIO_SCRAPER_API_SECRET']`.
 
-## Development
+Create `config/initializers/envisio_scraper.rb` with the following content.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+EnvisioScraper.configure do |c|
+  c.api_key    = ENV['ENVISIO_SCRAPER_API_KEY']
+  c.api_secret = ENV['ENVISIO_SCRAPER_API_SECRET']
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Service ping
 
-## Contributing
+```ruby
+EnvisioScraper::ScrapeApi.new.ping
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/envisioscraper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/envisioscraper/blob/master/CODE_OF_CONDUCT.md).
+### Create a new scrape request
 
+```ruby
+EnvisioScraper::ScrapeApi.new.scrape(scrape_url: 'https://example.com', callback_url: 'https://callback.sender.com?with_sender_determined_params')
+```
 
-## Code of Conduct
+The `scrape` method will return a `typhoeus` response object. You can obtain response body by referring to `typhoeus` API. Part of the response body includes the newly created scrape API's ID, which can be used by `check_status`.
 
-Everyone interacting in the Envisioscraper project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/envisioscraper/blob/master/CODE_OF_CONDUCT.md).
+With the new scrape created, the Envisio Web Scraper Service will send the scraped HTML content from `scrape_url` to `callback_url` as a "POST" requst. The scraped content will be included as the post body under the `content` key.
+
+### Check scrape request status
+
+```ruby
+EnvisioScraper::ScrapeApi.new.check_status(scrape_id: 1)
+```
